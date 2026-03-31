@@ -1,20 +1,5 @@
-# imagem base com Node
-FROM node:18
+FROM public.ecr.aws/lambda/nodejs:20
 
-# pasta dentro do container
-WORKDIR /app
+COPY index.js ${LAMBDA_TASK_ROOT}
 
-# copia os arquivos
-COPY package.json ./
-
-# instala dependências
-RUN npm install
-
-# copia o resto do projeto
-COPY . .
-
-# expõe a porta
-EXPOSE 3000
-
-# comando para rodar
-CMD ["npm", "start"]
+CMD ["index.handler"]
